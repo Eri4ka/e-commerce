@@ -1,0 +1,22 @@
+.loader {
+    display: flex;
+    justify-content: center;
+
+    &_size {
+
+        &-s {
+            height: 20px;
+            width: 20px;
+        }
+
+        &-m {
+            height: 40px;
+            width: 40px;
+        }
+
+        &-l {
+            height: 60px;
+            width: 60px;
+        }
+    }
+}

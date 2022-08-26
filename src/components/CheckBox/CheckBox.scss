@@ -1,0 +1,48 @@
+.checkbox {
+    position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+
+.checkbox + label {
+    position: relative;
+    vertical-align: middle;
+    padding: 0 0 0 30px;
+    cursor: pointer;
+}
+
+/* Чекбокс в состоянии неактивен */
+.checkbox + label:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0px 4px 120px #AFADB5;
+}
+
+/* Фон чекбокса в состоянии активен */
+.checkbox:checked + label:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url(../../resources/svg/Check.svg) no-repeat 50% 30%;
+    height: 40px;
+    width: 40px;
+    box-shadow: 0px 4px 120px #AFADB5;
+}
+
+.checkbox:focus + label:before {
+    border: 1px solid #518581;
+}
+
+.checkbox:disabled + label:before {
+    opacity: .7;
+}
+
+.checkbox:disabled + label:after {
+    opacity: .7;
+}
+

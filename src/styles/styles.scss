@@ -1,0 +1,81 @@
+@import "@styles/variables.scss";
+
+* {
+    font-family: "Eudoxus Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: $text-color;
+}
+
+button {
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+input {
+  height: 84px;
+  outline: none;
+  border: none;
+  text-indent: 29px;
+  box-shadow: 0px 4px 120px rgba(175, 173, 181, 0.15);
+}
+
+input:focus {
+  border: 1px solid $border-color;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 64px;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 44px;
+}
+
+h3 {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 18px;
+  color: #AFADB5;
+}
+
+svg {
+    animation: loader 1s steps(50) infinite;
+    background: transparent;
+  }
+  
+  @keyframes loader {
+    from {
+      transform: rotate(0deg)
+    }
+    
+    to {
+      transform: rotate(360deg)
+    }
+  }
+
+@media screen and (max-width: 991px) {
+  * {
+    font-size: 14px;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 14px;
+  }
+  input {
+    height: 54px;
+  }
+}

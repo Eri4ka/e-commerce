@@ -1,0 +1,20 @@
+.main-goods {
+    display: flex;
+    justify-content: center;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 30px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .main-goods {
+
+        &__grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+        }
+    }
+}

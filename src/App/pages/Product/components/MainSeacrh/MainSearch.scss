@@ -1,0 +1,51 @@
+.main-search {
+    position: relative;
+    width: 1021px;
+    height: 84px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 25px;
+        left: 28px;
+        background: url(../../../../../resources/svg/Search.svg) no-repeat 50% 30%;
+        height: 32px;
+        width: 32px;
+    }
+
+    &__input {
+        width: 100%;
+        text-indent: 75px;
+    }
+
+    &__submit {
+        position: absolute;
+        top: 15px;
+        right: 28px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .main-search {
+        width: 327px;
+        height: 54px;
+
+        &:before {
+            top: 14px;
+            left: 16px;
+            background: url(../../../../../resources/svg/SearchMob.svg) no-repeat 50% 30%;
+            height: 24px;
+            width: 24px;    
+        }
+
+        &__input {
+            width: 100%;
+            text-indent: 50px;
+        }
+
+        &__submit {
+            top: 8px;
+            right: 8px;
+        }
+    }
+}

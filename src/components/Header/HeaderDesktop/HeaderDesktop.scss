@@ -1,0 +1,56 @@
+@import "@styles/variables.scss";
+
+.header-desktop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 120px;
+    border-bottom: 2px solid #F3F3F3;
+    padding: 39px 100px;
+
+    &__logo {
+        display: flex;
+    }
+
+    &__text {
+        margin-left:  12px;
+    }
+}
+
+.section {
+    display: flex;
+
+    a {
+        position: relative;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-right: 60px;
+        }
+    }
+
+    &_active {
+        color: $border-color;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 68px;
+            width: 100%;
+            border-bottom: 3px solid $border-color;
+        }
+    }
+}
+
+.icons {
+
+    &__bag {
+        cursor: pointer;
+    }
+
+    &__user {
+        margin-left: 27px;
+        cursor: pointer;
+    }
+}

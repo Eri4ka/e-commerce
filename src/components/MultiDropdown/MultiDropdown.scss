@@ -1,0 +1,56 @@
+.dropdown {
+    position: relative;
+    width: 176px;
+
+    &-toggle {
+        border: none;
+        width: 190px;
+        height: 84px;
+        text-align: center;
+        box-shadow: 0px 4px 120px rgba(175, 173, 181, 0.15);
+
+        &:focus {
+            border: 1px solid #518581;
+        }
+
+        &__text {
+            margin-left: 42px;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 27px;
+                left: 52px;
+                background: url("../../resources/svg/Filter.svg") no-repeat;
+                height: 30px;
+                width: 30px;
+            }
+        }
+    }
+
+    &-menu {
+        position: absolute;
+        top: 96px;
+        display: flex;
+        flex-direction: column;
+        width: 190px;
+        box-shadow: 0px 4px 120px rgba(175, 173, 181, 0.15);
+        z-index: 1;
+    }
+
+    &-item {
+        text-align: center;
+        font-size: 14px;
+        color: #000000;
+        border: none;
+        height: 50px;
+
+        &:hover {
+            color: #518581;
+        }
+
+        &:focus {
+            color: #518581;
+        }
+    }
+}

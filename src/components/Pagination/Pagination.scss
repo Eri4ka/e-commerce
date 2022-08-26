@@ -1,0 +1,62 @@
+@import "@styles/variables.scss";
+
+.pagination {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+
+    &__prev {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: url('../../resources/svg/Arrow.svg') no-repeat;
+        margin: 0 18px;
+        transform: rotate(180deg);
+    }
+
+    &__next {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: url('../../resources/svg/Arrow.svg') no-repeat;
+        margin: 0 18px;
+    }
+
+    &__page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        width: 38px;
+        height: 42px;
+        border: 1.5px solid #F9F9F9;
+        color: $text-color;
+    }
+}
+
+.page_active {
+    background: #518581;
+    color: $white;
+}
+
+@media screen and (max-width: 991px) {
+    .pagination {
+        margin-top: 32px;
+
+        &__page {
+            width: 32px;
+            height: 32px;
+        }
+
+        &__prev {
+            margin: 0 14px;
+        }
+
+        &__next {
+            margin: 0 14px;
+        }
+    } 
+}

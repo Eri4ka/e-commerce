@@ -1,0 +1,26 @@
+.header-mobile {
+    display: flex;
+    padding: 20px 24px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #F3F3F3;
+
+    &__logo {
+        display: flex;
+    }
+
+    &__img {
+        width: 32px;
+        height: 32px;
+    }
+
+    &__text {
+        margin-left: 9px;
+        width: 58px;
+    }
+}
+
+.menu {
+    display: flex;
+}
+

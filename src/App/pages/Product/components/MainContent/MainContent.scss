@@ -1,0 +1,11 @@
+.main-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 991px) {
+    .main-filters {
+        margin-bottom: 31.5px;
+    }
+  }
