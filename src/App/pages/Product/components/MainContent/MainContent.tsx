@@ -21,7 +21,6 @@ export interface Product {
   rating?: { count: number; rate: number };
 }
 
-//Пришлось костылять под релизацию пагинации в данном api + поиск + фильтры
 const MainContent = () => {
   const [products, setProducts] = React.useState([]);
   const [initialProducts, setinitialProducts] = React.useState<Product[]>([]);
@@ -57,18 +56,6 @@ const MainContent = () => {
       : initialProducts.length
   );
 
-  // React.useEffect(() => {
-  //   request('https://fakestoreapi.com/products').then(setProducts);
-  // }, []);
-  //
-  // React.useEffect(() => {
-  //   if (value.length === 0) {
-  //     request(`https://fakestoreapi.com/products?limit=${6 * page}`).then(
-  //       setProducts
-  //     );
-  //   }
-  // }, [page]);
-
   React.useEffect(() => {
     request('https://fakestoreapi.com/products/categories').then((res) =>
       setCategories(
@@ -92,7 +79,7 @@ const MainContent = () => {
   //   );
   // };
 
-  //Реализация поиска при текущем api
+  //Реализация поиска с учетом фильтрации при текущем api
   const search = (term: string) => {
     setIsSearch(true);
     if (value.length !== 0) {
