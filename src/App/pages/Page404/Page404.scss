@@ -1,0 +1,23 @@
+@import "@styles/variables.scss";
+
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__title {
+        font-weight: 700;
+        font-size: 38px;
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .not-found {
+
+        &__title {
+            font-size: 24px;
+        }
+    }
+  }
