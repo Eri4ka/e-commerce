@@ -19,8 +19,7 @@ export const HeaderDesktop = () => {
       </div>
       <div className={cl('section')}>
         <NavLink
-          end
-          to="/"
+          to="/product"
           className={({ isActive }) =>
             isActive ? 'section_active' : undefined
           }
