@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import './MainTotal.scss';
 import cl from 'classnames';
 
@@ -5,7 +7,7 @@ type MainTotalProps = {
   total?: number;
 };
 
-const MainTotal: React.FC<MainTotalProps> = ({ total }) => {
+const MainTotal: React.FC<MainTotalProps> = memo(({ total }) => {
   return (
     <div className={cl('main-total')}>
       <h2 className={cl('main-total__title')}>Total product</h2>
@@ -16,6 +18,6 @@ const MainTotal: React.FC<MainTotalProps> = ({ total }) => {
       </div>
     </div>
   );
-};
+});
 
 export default MainTotal;
