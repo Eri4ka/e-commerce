@@ -38,7 +38,6 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
       // value.length === 0 ? onChange([opt]) : onChange(value.filter(val => val.key !== opt.key))
       value.some((val) => val.key === opt.key) ? onChange([]) : onChange([opt]);
     };
-    console.log('render');
 
     return (
       <div className={cl('dropdown')}>

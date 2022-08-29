@@ -28,7 +28,6 @@ const MainContent = () => {
   const [value, setValue] = React.useState<[key: string, value: string] | any>(
     []
   );
-  const [str, setStr] = React.useState('');
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
   const { isMobile } = useMobile(window.innerWidth < 991 ? true : false);
   const { loading, request } = useHttp();
@@ -65,7 +64,7 @@ const MainContent = () => {
         })
       )
     );
-  }, []);
+  }, [request]);
 
   React.useEffect(() => {
     setinitialProducts([...products]);
@@ -76,16 +75,15 @@ const MainContent = () => {
     if (value.length !== 0) {
       request(
         `https://fakestoreapi.com/products/category/${value[0].value}?limit=${
-          6 * page
+          3 * page
         }`
       ).then(setinitialProducts);
-      setPage(page);
     } else {
       request(`https://fakestoreapi.com/products?limit=${6 * page}`).then(
         setProducts
       );
     }
-  }, [value, page]);
+  }, [value, page, request]);
 
   //Реализация поиска при статичных данных
   // const search = (value: string) => {
@@ -97,48 +95,57 @@ const MainContent = () => {
   // };
 
   //Реализация поиска с учетом фильтрации при текущем api
-  const search = (term: string) => {
-    setIsSearch(true);
-    setPage(1);
-    if (value.length !== 0) {
-      if (term.length !== 0) {
-        request(`https://fakestoreapi.com/products/category/${value[0].value}`)
-          .then((res) => {
-            return res.filter((item: any) => {
-              return item.title.toLowerCase().includes(term);
-            });
-          })
-          .then(setinitialProducts);
+  const search = React.useCallback(
+    (term: string) => {
+      setIsSearch(true);
+      setPage(1);
+      if (value.length !== 0) {
+        if (term.length !== 0) {
+          request(
+            `https://fakestoreapi.com/products/category/${value[0].value}`
+          )
+            .then((res) => {
+              return res.filter((item: any) => {
+                return item.title.toLowerCase().includes(term);
+              });
+            })
+            .then(setinitialProducts);
+        } else {
+          request(
+            `https://fakestoreapi.com/products/category/${
+              value[0].value
+            }?limit=${6 * page}`
+          ).then(setinitialProducts);
+          setIsSearch(false);
+        }
       } else {
-        request(
-          `https://fakestoreapi.com/products/category/${value[0].value}?limit=${
-            6 * page
-          }`
-        ).then(setinitialProducts);
-        setIsSearch(false);
+        if (term.length !== 0) {
+          request('https://fakestoreapi.com/products')
+            .then((res) => {
+              return res.filter((item: any) => {
+                return item.title.toLowerCase().includes(term);
+              });
+            })
+            .then(setinitialProducts);
+        } else {
+          request(`https://fakestoreapi.com/products?limit=${6 * page}`).then(
+            setProducts
+          );
+          setIsSearch(false);
+        }
       }
-    } else {
-      if (term.length !== 0) {
-        request('https://fakestoreapi.com/products')
-          .then((res) => {
-            return res.filter((item: any) => {
-              return item.title.toLowerCase().includes(term);
-            });
-          })
-          .then(setinitialProducts);
-      } else {
-        request(`https://fakestoreapi.com/products?limit=${6 * page}`).then(
-          setProducts
-        );
-        setIsSearch(false);
-      }
-    }
-  };
+    },
+    [page, request, setPage, value]
+  );
 
-  const onValue = React.useCallback((item: any) => {
-    setValue([...item]);
-    setIsSearch(false);
-  }, []);
+  const onValue = React.useCallback(
+    (item: any) => {
+      setValue([...item]);
+      setPage(1);
+      setIsSearch(false);
+    },
+    [setPage]
+  );
 
   const defaultPluralizeOptions = React.useCallback(
     (elements: any[]) => elements.map((el: any) => el.value).join(),

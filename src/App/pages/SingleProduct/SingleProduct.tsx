@@ -13,7 +13,7 @@ const SingleProduct = () => {
 
   React.useEffect(() => {
     request(`https://fakestoreapi.com/products/${id}`).then(setProduct);
-  }, [id]);
+  }, [id, request]);
 
   return (
     <>
