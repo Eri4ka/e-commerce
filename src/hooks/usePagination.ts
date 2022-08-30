@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 interface UsePaginationReturn {
   page: number;
@@ -19,7 +19,7 @@ export const usePagination: UsePagination = (contentPerPage, count) => {
   const pageCount = Math.ceil(count / contentPerPage);
   const lastContentIndex = page * contentPerPage;
   const firstContentIndex = lastContentIndex - contentPerPage;
-  const changePage = (direction: boolean) => {
+  const changePage = useCallback((direction: boolean) => {
     setPage((state) => {
       if (direction) {
         if (state === pageCount) {
@@ -33,16 +33,19 @@ export const usePagination: UsePagination = (contentPerPage, count) => {
         return state - 1;
       }
     });
-  };
-  const setPageSAFE = (num: number) => {
-    if (num > pageCount) {
-      setPage(pageCount);
-    } else if (num < 1) {
-      setPage(1);
-    } else {
-      setPage(num);
-    }
-  };
+  }, []);
+  const setPageSAFE = useCallback(
+    (num: number) => {
+      if (num > pageCount) {
+        setPage(pageCount);
+      } else if (num < 1) {
+        setPage(1);
+      } else {
+        setPage(num);
+      }
+    },
+    [pageCount]
+  );
   return {
     totalPages: pageCount,
     nextPage: () => changePage(true),

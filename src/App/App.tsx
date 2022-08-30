@@ -1,25 +1,23 @@
 import './App.scss';
-import { Header } from '@components/Header/Header';
+import { Header } from '@components/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Page404 from './pages/Page404';
+import NotFoundPage from './pages/NotFoundPage';
 import Product from './pages/Product';
 import SingleProduct from './pages/SingleProduct';
 
 const App = () => {
   return (
-    <>
-      <Router>
-        <Header />
-        <div className="main">
-          <Routes>
-            <Route path="/product" element={<Product />} />
-            <Route path="/product/:id" element={<SingleProduct />} />
-            <Route path="*" element={<Page404 />} />
-          </Routes>
-        </div>
-      </Router>
-    </>
+    <Router>
+      <Header />
+      <main className="main">
+        <Routes>
+          <Route path="/product" element={<Product />} />
+          <Route path="/product/:id" element={<SingleProduct />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </Router>
   );
 };
 

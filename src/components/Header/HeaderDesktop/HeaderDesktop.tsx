@@ -8,7 +8,7 @@ import './HeaderDesktop.scss';
 
 export const HeaderDesktop = () => {
   return (
-    <div className={cl('header-desktop')}>
+    <header className={cl('header-desktop')}>
       <div className={cl('header-desktop__logo')}>
         <img className={cl('header-desktop__img')} src={logo} alt="logo" />
         <img
@@ -58,6 +58,6 @@ export const HeaderDesktop = () => {
         <img className={cl('icons__bag')} src={bag} alt="bag" />
         <img className={cl('icons__user')} src={user} alt="user" />
       </div>
-    </div>
+    </header>
   );
 };

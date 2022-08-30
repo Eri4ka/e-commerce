@@ -1,7 +1,7 @@
 import './MainGoods.scss';
 
-import { Card } from '@components/Card/Card';
-import { LoaderSize, Loader } from '@components/Loader/Loader';
+import { Card } from '@components/Card';
+import { LoaderSize, Loader } from '@components/Loader';
 import cl from 'classnames';
 
 type MainGoodsProps = {

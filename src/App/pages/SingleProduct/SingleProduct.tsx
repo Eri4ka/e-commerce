@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Loader, LoaderSize } from '@components/Loader/Loader';
+import { Loader, LoaderSize } from '@components/Loader';
 import { useHttp } from '@hooks/http.hook';
 import { useParams } from 'react-router-dom';
 

@@ -13,11 +13,11 @@
     }
 }
 
-@media screen and (max-width: 991px) {
+@include _991 {
     .not-found {
 
         &__title {
             font-size: 24px;
         }
     }
-  }
+ }

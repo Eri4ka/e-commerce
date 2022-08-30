@@ -42,7 +42,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
     return (
       <div className={cl('dropdown')}>
         <button
-          className={cl('dropdown-toggle')}
+          className={cl('dropdown-toggle', 'button')}
           onClick={toggleDropDownMenu}
           disabled={disabled}
         >
@@ -56,7 +56,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
           <div className={cl('dropdown-menu')}>
             {options.map((item) => (
               <button
-                className={cl('dropdown-item')}
+                className={cl('dropdown-item', 'button')}
                 key={item.key}
                 onClick={() => onHandleOption(item)}
               >

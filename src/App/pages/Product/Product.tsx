@@ -1,5 +1,5 @@
-import MainContent from './components/MainContent/MainContent';
-import MainTitle from './components/MainTitle/MainTitle';
+import MainContent from './components/MainContent';
+import MainTitle from './components/MainTitle';
 
 const Product = () => {
   return (

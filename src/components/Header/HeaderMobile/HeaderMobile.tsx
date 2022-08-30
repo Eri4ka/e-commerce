@@ -6,7 +6,7 @@ import cl from 'classnames';
 
 export const HeaderMobile = () => {
   return (
-    <div className={cl('header-mobile')}>
+    <header className={cl('header-mobile')}>
       <div className={cl('header-mobile__logo')}>
         <img className={cl('header-mobile__img')} src={logo} alt="logo" />
         <img
@@ -18,6 +18,6 @@ export const HeaderMobile = () => {
       <div className={cl('menu')}>
         <img src={mobileMenu} alt="bag" />
       </div>
-    </div>
+    </header>
   );
 };

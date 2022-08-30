@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { MOBILE_VIEW } from '@lib/constants';
+
 interface UseMobileResult {
   isMobile: boolean;
 }
@@ -7,11 +9,11 @@ interface UseMobileResult {
 export const useMobile = (initial: boolean): UseMobileResult => {
   const [isMobile, setMobile] = React.useState(initial);
 
-  const handleResize = () => {
-    window.innerWidth < 991 ? setMobile(true) : setMobile(false);
-  };
-
   React.useEffect(() => {
+    const handleResize = () => {
+      window.innerWidth < MOBILE_VIEW ? setMobile(true) : setMobile(false);
+    };
+
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);

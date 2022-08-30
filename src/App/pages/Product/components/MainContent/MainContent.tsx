@@ -1,15 +1,16 @@
 import React from 'react';
 
 import './MainContent.scss';
-import { MultiDropdown } from '@components/MultiDropdown/MultiDropdown';
+import { MultiDropdown } from '@components/MultiDropdown';
 import Pagination from '@components/Pagination';
 import { useHttp } from '@hooks/http.hook';
 import { useMobile } from '@hooks/useMobile';
 import { usePagination } from '@hooks/usePagination';
+import { MOBILE_VIEW } from '@lib/constants';
 
-import MainGoods from '../MainGoods/MainGoods';
+import MainGoods from '../MainGoods';
 import MainSeacrh from '../MainSeacrh';
-import MainTotal from '../MainTotal/MainTotal';
+import MainTotal from '../MainTotal';
 
 export interface Product {
   id: number;
@@ -21,15 +22,17 @@ export interface Product {
   rating?: { count: number; rate: number };
 }
 
-const MainContent = () => {
-  const [products, setProducts] = React.useState([]);
+const MainContent: React.FC = () => {
+  const [products, setProducts] = React.useState<Product[]>([]);
   const [initialProducts, setinitialProducts] = React.useState<Product[]>([]);
   const [categories, setCategories] = React.useState([]);
   const [value, setValue] = React.useState<[key: string, value: string] | any>(
     []
   );
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
-  const { isMobile } = useMobile(window.innerWidth < 991 ? true : false);
+  const { isMobile } = useMobile(
+    window.innerWidth < MOBILE_VIEW ? true : false
+  );
   const { loading, request } = useHttp();
   const {
     firstContentIndex,

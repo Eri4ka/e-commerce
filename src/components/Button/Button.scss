@@ -4,7 +4,9 @@
     width: 138px;
     height: 54px;
     border: none;
-    color: #FFFFFF;
+    color: $white;
+    background: $white;
+    cursor: pointer;
     display: flex;
     align-items: center;
     padding: 0 14.3px;

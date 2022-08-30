@@ -6,8 +6,10 @@
         "@config/*": ["src/config/*"],
         "@styles/*": ["src/styles/*"],
         "@utils/*": ["src/utils/*"],
-        "@images/*": ["src/resources/*"],
-        "@hooks/*": ["src/hooks/*"]
+        "@images/*": ["src/images/*"],
+        "@hooks/*": ["src/hooks/*"],
+        "@pages/*": ["src/App/pages/*"],
+        "@lib/*": ["src/lib/*"]
       }
     }
-  }
+}

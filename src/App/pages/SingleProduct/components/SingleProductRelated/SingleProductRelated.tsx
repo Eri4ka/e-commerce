@@ -1,8 +1,8 @@
 import React from 'react';
 
 import './SingleProductRelated.scss';
-import { Card } from '@components/Card/Card';
-import { Loader, LoaderSize } from '@components/Loader/Loader';
+import { Card } from '@components/Card';
+import { Loader, LoaderSize } from '@components/Loader';
 import { useHttp } from '@hooks/http.hook';
 import cl from 'classnames';
 import { Product } from 'src/App/pages/Product/components/MainContent/MainContent';

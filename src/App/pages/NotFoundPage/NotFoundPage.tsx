@@ -1,7 +1,7 @@
-import { Button } from '@components/Button/Button';
+import { Button } from '@components/Button';
 import cl from 'classnames';
 import { useNavigate } from 'react-router-dom';
-import './Page404.scss';
+import './NotFoundPage.scss';
 
 const Page404 = () => {
   const navigate = useNavigate();

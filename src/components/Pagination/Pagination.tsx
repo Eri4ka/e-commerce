@@ -100,13 +100,13 @@ const Pagination: React.FC<PaginationProps> = ({
         onClick={prevPage}
         className={cl('pagination__prev')}
         disabled={page === 1 && true}
-      ></Button>
+      />
       {pageElems}
       <Button
         onClick={nextPage}
         className={cl('pagination__next')}
         disabled={page === totalPages && true}
-      ></Button>
+      />
     </div>
   );
 };

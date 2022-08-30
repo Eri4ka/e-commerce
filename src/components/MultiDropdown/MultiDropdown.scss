@@ -1,8 +1,11 @@
+@import "@styles/variables.scss";
+
 .dropdown {
     position: relative;
     width: 176px;
 
     &-toggle {
+        color: $text-color;
         border: none;
         width: 190px;
         height: 84px;
@@ -10,7 +13,7 @@
         box-shadow: 0px 4px 120px rgba(175, 173, 181, 0.15);
 
         &:focus {
-            border: 1px solid #518581;
+            border: 1px solid $border-color;
         }
 
         &__text {
@@ -21,7 +24,7 @@
                 position: absolute;
                 top: 27px;
                 left: 52px;
-                background: url("../../resources/svg/Filter.svg") no-repeat;
+                background: url("../../images/svg/Filter.svg") no-repeat;
                 height: 30px;
                 width: 30px;
             }
@@ -41,16 +44,17 @@
     &-item {
         text-align: center;
         font-size: 14px;
-        color: #000000;
+        color: #151411;
         border: none;
         height: 50px;
+        width: 100%;
 
         &:hover {
-            color: #518581;
+            color: $border-color;
         }
 
         &:focus {
-            color: #518581;
+            color: $border-color;
         }
     }
 }

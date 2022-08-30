@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, ButtonColor } from '@components/Button/Button';
+import { Button, ButtonColor } from '@components/Button';
 import cl from 'classnames';
 
 import './SingleProductCard.scss';
@@ -62,7 +62,6 @@ const SingleProductCard: React.FC<SingleProductCardProps> = React.memo(
             </div>
           </div>
         </div>
-
         <SingleProductRelated product={product} />
       </div>
     );
