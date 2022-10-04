@@ -9,7 +9,8 @@
         "@images/*": ["src/images/*"],
         "@hooks/*": ["src/hooks/*"],
         "@pages/*": ["src/App/pages/*"],
-        "@lib/*": ["src/lib/*"]
+        "@lib/*": ["src/lib/*"],
+        "@myredux/*": ["src/redux/*"]
       }
     }
 }

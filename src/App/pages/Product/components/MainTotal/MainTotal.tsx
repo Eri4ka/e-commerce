@@ -1,19 +1,19 @@
 import { memo } from 'react';
 
+import { useAppSelector } from '@myredux/hooks';
+import { productsSelector } from '@myredux/slices/productsSlice';
 import './MainTotal.scss';
 import cl from 'classnames';
 
-type MainTotalProps = {
-  total?: number;
-};
+const MainTotal: React.FC = memo(() => {
+  const products = useAppSelector(productsSelector);
 
-const MainTotal: React.FC<MainTotalProps> = memo(({ total }) => {
   return (
     <div className={cl('main-total')}>
       <h2 className={cl('main-total__title')}>Total product</h2>
       <div className={cl('main-total__wrapper')}>
         <div className={cl('main-total__wrapper-count')}>
-          {total ? total : 0}
+          {products ? products.length : 0}
         </div>
       </div>
     </div>

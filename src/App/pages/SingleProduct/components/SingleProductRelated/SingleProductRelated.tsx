@@ -1,57 +1,64 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import './SingleProductRelated.scss';
 import { Card } from '@components/Card';
 import { Loader, LoaderSize } from '@components/Loader';
-import { useHttp } from '@hooks/http.hook';
+import { useAppDispatch, useAppSelector } from '@myredux/hooks';
+import {
+  relatedProductsSelector,
+  fetchRelatedProducts,
+} from '@myredux/slices/relatedProductsSlice';
+import { selectAll } from '@myredux/slices/singleProductSlice';
 import cl from 'classnames';
 import { Product } from 'src/App/pages/Product/components/MainContent/MainContent';
 
-type SingleProductRelatedProps = {
-  readonly product: { id: number; category: string };
-};
-
-const SingleProductRelated: React.FC<SingleProductRelatedProps> = ({
-  product,
-}) => {
-  const [productsRelated, setProductsRelated] = React.useState<Product[]>([]);
-  const { loading, request } = useHttp();
+const SingleProductRelated: React.FC = memo(() => {
+  const dispatch = useAppDispatch();
+  const relatedProducts = useAppSelector(relatedProductsSelector);
+  const singleProduct = useAppSelector(selectAll) as Product[];
+  const loading = useAppSelector(
+    (state) => state.relatedProducts.relatedProductsLoadingStatus
+  );
 
   React.useEffect(() => {
-    request(
-      `https://fakestoreapi.com/products/category/${product.category}`
-    ).then(setProductsRelated);
-  }, []);
+    dispatch(fetchRelatedProducts(singleProduct[0].category));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [singleProduct]);
+
+  const renderProducts = () => {
+    return (
+      <div className={cl('main-goods')}>
+        <div className={cl('main-goods__grid')}>
+          {relatedProducts.map((item: any) => {
+            return (
+              <Card
+                id={item.id}
+                key={item.id}
+                category={item.category}
+                image={item.image}
+                title={item.title}
+                subtitle={item.description}
+                content={'$' + item.price}
+              />
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  const renderedProducts = loading === 'idle' && renderProducts();
+  const loader = loading === 'loading' && (
+    <Loader size={LoaderSize.l} className={'loader'} />
+  );
+
   return (
     <div className={cl('related')}>
       <div className={cl('related__title')}>Related Items</div>
-      {!loading ? (
-        <div className={cl('main-goods')}>
-          <div className={cl('main-goods__grid')}>
-            {productsRelated.map((item) => {
-              if (item.id !== product.id) {
-                return (
-                  <Card
-                    id={item.id}
-                    key={item.id}
-                    category={item.category}
-                    image={item.image}
-                    title={item.title}
-                    subtitle={item.description}
-                    content={'$' + item.price}
-                  />
-                );
-              } else {
-                return null;
-              }
-            })}
-          </div>
-        </div>
-      ) : (
-        <Loader size={LoaderSize.l} className={'loader'} />
-      )}
+      {renderedProducts}
+      {loader}
     </div>
   );
-};
+});
 
 export default SingleProductRelated;

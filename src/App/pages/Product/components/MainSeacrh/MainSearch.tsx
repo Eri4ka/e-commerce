@@ -3,14 +3,14 @@ import React from 'react';
 import './MainSearch.scss';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
+import { useAppDispatch, useAppSelector } from '@myredux/hooks';
+import { getSearchValue } from '@myredux/slices/productsSlice';
 import cl from 'classnames';
 
-type MainSearchProps = {
-  search: (term: string) => void;
-};
-
-const MainSearch: React.FC<MainSearchProps> = ({ search }) => {
-  const [value, setValue] = React.useState<string>('');
+const MainSearch: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const searchValue = useAppSelector((state) => state.products.searchValue);
+  const [value, setValue] = React.useState<string>(searchValue);
 
   return (
     <div className={cl('main-search')}>
@@ -19,10 +19,12 @@ const MainSearch: React.FC<MainSearchProps> = ({ search }) => {
         placeholder={'Search property'}
         onChange={(value: string) => setValue(value)}
         className={cl('main-search__input')}
-        onKeyDown={(e) => (e.key === 'Enter' ? search(value) : null)}
+        onKeyDown={(e) =>
+          e.key === 'Enter' ? dispatch(getSearchValue(value)) : null
+        }
       />
       <Button
-        onClick={() => search(value)}
+        onClick={() => dispatch(getSearchValue(value))}
         className={cl('main-search__submit')}
       >
         Find Now

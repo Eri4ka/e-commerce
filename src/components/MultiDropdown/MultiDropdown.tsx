@@ -1,5 +1,11 @@
-import React, { useState, memo } from 'react';
+import { useState, useEffect, memo } from 'react';
 
+import { useAppDispatch, useAppSelector } from '@myredux/hooks';
+import {
+  filtersChanged,
+  categorySelector,
+  fetchCategories,
+} from '@myredux/slices/categorySlice';
 import cl from 'classnames';
 // import '@components/MultiDropdown/MultiDropdown.css'
 import './MultiDropdown.scss';
@@ -13,59 +19,52 @@ export type Option = {
   value: string;
 };
 
-export type MultiDropdownProps = {
-  /** Массив возможных вариантов для выбора */
-  options: Option[];
-  /** Текущие выбранные значения поля, массив может быть пустым */
-  value: Option[];
-  /** Callback, вызываемый при выборе варианта */
-  onChange: (value: Option[]) => void;
-  /** Заблокирован ли дропдаун */
-  disabled?: boolean;
-  /** Преобразовать выбранные значения в строку. Отображается в дропдауне в качестве выбранного значения */
-  pluralizeOptions: (value: Option[]) => string;
-};
+export const MultiDropdown: React.FC = memo(() => {
+  const category = useAppSelector(categorySelector);
+  const value = useAppSelector((state) => state.category.activeFilter);
+  const categoryLoadingStatus = useAppSelector(
+    (state) => state.category.categoryLoadingStatus
+  );
+  const dispatch = useAppDispatch();
+  const [dropDownMenu, setdropDownMenu] = useState(false);
 
-export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
-  ({ options, value, onChange, disabled, pluralizeOptions }) => {
-    const [dropDownMenu, setdropDownMenu] = useState(false);
+  useEffect(() => {
+    dispatch(fetchCategories());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    const toggleDropDownMenu = () => {
-      setdropDownMenu((menu) => !menu);
-    };
+  const toggleDropDownMenu = () => {
+    setdropDownMenu((menu) => !menu);
+  };
 
-    const onHandleOption = (opt: any) => {
-      // value.length === 0 ? onChange([opt]) : onChange(value.filter(val => val.key !== opt.key))
-      value.some((val) => val.key === opt.key) ? onChange([]) : onChange([opt]);
-    };
+  const disabled = categoryLoadingStatus === 'loading';
 
-    return (
-      <div className={cl('dropdown')}>
-        <button
-          className={cl('dropdown-toggle', 'button')}
-          onClick={toggleDropDownMenu}
-          disabled={disabled}
-        >
-          {value.length !== 0 ? (
-            pluralizeOptions(value)
-          ) : (
-            <div className={cl('dropdown-toggle__text')}>Filter</div>
-          )}
-        </button>
-        {!disabled && dropDownMenu ? (
-          <div className={cl('dropdown-menu')}>
-            {options.map((item) => (
-              <button
-                className={cl('dropdown-item', 'button')}
-                key={item.key}
-                onClick={() => onHandleOption(item)}
-              >
-                {item.value}
-              </button>
-            ))}
-          </div>
-        ) : null}
-      </div>
-    );
-  }
-);
+  return (
+    <div className={cl('dropdown')}>
+      <button
+        className={cl('dropdown-toggle', 'button')}
+        onClick={toggleDropDownMenu}
+        disabled={disabled}
+      >
+        {value === '' ? (
+          <div className={cl('dropdown-toggle__text')}>Filter</div>
+        ) : (
+          value
+        )}
+      </button>
+      {!disabled && dropDownMenu ? (
+        <div className={cl('dropdown-menu')}>
+          {category.map((item) => (
+            <button
+              className={cl('dropdown-item', 'button')}
+              key={item.key}
+              onClick={() => dispatch(filtersChanged(item))}
+            >
+              {item.value}
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+});
