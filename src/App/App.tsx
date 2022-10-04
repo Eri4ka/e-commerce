@@ -12,7 +12,9 @@ const App = () => {
       <Header />
       <main className="main">
         <Routes>
-          <Route path="/product" element={<Product />} />
+          {['/', '/product'].map((path, index) => {
+            return <Route path={path} element={<Product />} key={index} />;
+          })}
           <Route path="/product/:id" element={<SingleProduct />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

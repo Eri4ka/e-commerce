@@ -1,29 +1,26 @@
 import React from 'react';
 
-import { Loader, LoaderSize } from '@components/Loader';
-import { useHttp } from '@hooks/http.hook';
+import LoadedContent from '@components/LoadedContent';
+import { useAppDispatch, useAppSelector } from '@myredux/hooks';
+import { fetchSingleProduct } from '@myredux/slices/singleProductSlice';
 import { useParams } from 'react-router-dom';
 
 import SingleProductCard from './components/SingleProductCard';
 
 const SingleProduct = () => {
   const { id } = useParams();
-  const [product, setProduct] = React.useState({});
-  const { loading, request } = useHttp();
+
+  const dispatch = useAppDispatch();
+  const loading = useAppSelector(
+    (state) => state.product.singleProductLoadingStatus
+  );
 
   React.useEffect(() => {
-    request(`https://fakestoreapi.com/products/${id}`).then(setProduct);
-  }, [id, request]);
+    dispatch(fetchSingleProduct(id!));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
-  return (
-    <>
-      {loading ? (
-        <Loader size={LoaderSize.l} className={'loader'} />
-      ) : (
-        <SingleProductCard product={product} />
-      )}
-    </>
-  );
+  return <LoadedContent loading={loading} Component={SingleProductCard} />;
 };
 
 export default SingleProduct;

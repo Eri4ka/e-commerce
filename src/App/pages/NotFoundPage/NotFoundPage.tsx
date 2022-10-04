@@ -8,7 +8,7 @@ const Page404 = () => {
   return (
     <div className={cl('not-found')}>
       <p className={cl('not-found__title')}>Page doesn't exists</p>
-      <Button onClick={() => navigate('/product')}>Back to main</Button>
+      <Button onClick={() => navigate('/')}>Back to main</Button>
     </div>
   );
 };

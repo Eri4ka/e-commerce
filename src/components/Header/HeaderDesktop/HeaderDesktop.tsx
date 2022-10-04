@@ -3,10 +3,12 @@ import logoText from '@images/svg/Lalasia.svg';
 import logo from '@images/svg/Logo.svg';
 import user from '@images/svg/User.svg';
 import cl from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './HeaderDesktop.scss';
 
 export const HeaderDesktop = () => {
+  const location = useLocation();
+
   return (
     <header className={cl('header-desktop')}>
       <div className={cl('header-desktop__logo')}>
@@ -19,7 +21,7 @@ export const HeaderDesktop = () => {
       </div>
       <div className={cl('section')}>
         <NavLink
-          to="/product"
+          to={location.pathname === '/' ? '/' : '/product'}
           className={({ isActive }) =>
             isActive ? 'section_active' : undefined
           }

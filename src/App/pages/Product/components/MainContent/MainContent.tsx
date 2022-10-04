@@ -3,16 +3,21 @@ import React from 'react';
 import './MainContent.scss';
 import { MultiDropdown } from '@components/MultiDropdown';
 import Pagination from '@components/Pagination';
-import { useHttp } from '@hooks/http.hook';
 import { useMobile } from '@hooks/useMobile';
 import { usePagination } from '@hooks/usePagination';
-import { MOBILE_VIEW } from '@lib/constants';
+import { MOBILE_VIEW, ITEMS_PER_PAGE } from '@lib/constants';
+import { useAppDispatch, useAppSelector } from '@myredux/hooks';
+import {
+  fetchProducts,
+  fetchCategoryProducts,
+  totalPagesSelector,
+} from '@myredux/slices/productsSlice';
 
 import MainGoods from '../MainGoods';
 import MainSeacrh from '../MainSeacrh';
 import MainTotal from '../MainTotal';
 
-export interface Product {
+export type Product = {
   id: number;
   title: string;
   price: number;
@@ -20,171 +25,47 @@ export interface Product {
   category: string;
   image: string;
   rating?: { count: number; rate: number };
-}
+};
 
 const MainContent: React.FC = () => {
-  const [products, setProducts] = React.useState<Product[]>([]);
-  const [initialProducts, setinitialProducts] = React.useState<Product[]>([]);
-  const [categories, setCategories] = React.useState([]);
-  const [value, setValue] = React.useState<[key: string, value: string] | any>(
-    []
-  );
-  const [isSearch, setIsSearch] = React.useState<boolean>(false);
+  const currentPages = useAppSelector(totalPagesSelector);
+  const value = useAppSelector((state) => state.category.activeFilter);
+  const searchValue = useAppSelector((state) => state.products.searchValue);
+  const dispatch = useAppDispatch();
+
   const { isMobile } = useMobile(
     window.innerWidth < MOBILE_VIEW ? true : false
   );
-  const { loading, request } = useHttp();
-  const {
-    firstContentIndex,
-    lastContentIndex,
-    nextPage,
-    prevPage,
-    page,
-    setPage,
-    totalPages,
-  } = usePagination(
-    6,
-    !isSearch
-      ? value.length !== 0
-        ? value[0].key === 0
-          ? 6
-          : value[0].key === 1
-          ? 4
-          : value[0].key === 2
-          ? 4
-          : value[0].key === 3
-          ? 6
-          : 20
-        : 20
-      : 6
+  const { nextPage, prevPage, page, setPage, totalPages } = usePagination(
+    searchValue.length > 0 ? 20 : ITEMS_PER_PAGE,
+    currentPages
   );
 
   React.useEffect(() => {
-    request('https://fakestoreapi.com/products/categories').then((res) =>
-      setCategories(
-        res.map((value: string, key: number) => {
-          return { key, value };
-        })
-      )
-    );
-  }, [request]);
-
-  React.useEffect(() => {
-    setinitialProducts([...products]);
-  }, [products]);
-
-  //Грузим данные на страницу при активном фильтре и без
-  React.useEffect(() => {
-    if (value.length !== 0) {
-      request(
-        `https://fakestoreapi.com/products/category/${value[0].value}?limit=${
-          3 * page
-        }`
-      ).then(setinitialProducts);
+    if (value === '') {
+      dispatch(fetchProducts(page));
     } else {
-      request(`https://fakestoreapi.com/products?limit=${6 * page}`).then(
-        setProducts
-      );
+      dispatch(fetchCategoryProducts({ value, page }));
     }
-  }, [value, page, request]);
-
-  //Реализация поиска при статичных данных
-  // const search = (value: string) => {
-  //   setinitialProducts(
-  //     products.filter((item: any) => {
-  //       return item.title.toLowerCase().includes(value);
-  //     })
-  //   );
-  // };
-
-  //Реализация поиска с учетом фильтрации при текущем api
-  const search = React.useCallback(
-    (term: string) => {
-      setIsSearch(true);
-      setPage(1);
-      if (value.length !== 0) {
-        if (term.length !== 0) {
-          request(
-            `https://fakestoreapi.com/products/category/${value[0].value}`
-          )
-            .then((res) => {
-              return res.filter((item: any) => {
-                return item.title.toLowerCase().includes(term);
-              });
-            })
-            .then(setinitialProducts);
-        } else {
-          request(
-            `https://fakestoreapi.com/products/category/${
-              value[0].value
-            }?limit=${6 * page}`
-          ).then(setinitialProducts);
-          setIsSearch(false);
-        }
-      } else {
-        if (term.length !== 0) {
-          request('https://fakestoreapi.com/products')
-            .then((res) => {
-              return res.filter((item: any) => {
-                return item.title.toLowerCase().includes(term);
-              });
-            })
-            .then(setinitialProducts);
-        } else {
-          request(`https://fakestoreapi.com/products?limit=${6 * page}`).then(
-            setProducts
-          );
-          setIsSearch(false);
-        }
-      }
-    },
-    [page, request, setPage, value]
-  );
-
-  const onValue = React.useCallback(
-    (item: any) => {
-      setValue([...item]);
-      setPage(1);
-      setIsSearch(false);
-    },
-    [setPage]
-  );
-
-  const defaultPluralizeOptions = React.useCallback(
-    (elements: any[]) => elements.map((el: any) => el.value).join(),
-    []
-  );
+    setPage(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, value, searchValue]);
 
   return (
     <div className="main-content">
       <div className="main-filters">
-        <MainSeacrh search={search} />
-        {!isMobile ? (
-          <MultiDropdown
-            options={categories}
-            value={value}
-            onChange={onValue}
-            pluralizeOptions={defaultPluralizeOptions}
-            disabled={false}
-          />
-        ) : null}
+        <MainSeacrh />
+        {!isMobile ? <MultiDropdown /> : null}
       </div>
-      <MainTotal total={initialProducts.length} />
-      <MainGoods
-        products={initialProducts}
-        loading={loading}
-        firstContentIndex={firstContentIndex}
-        lastContentIndex={lastContentIndex}
+      <MainTotal />
+      <MainGoods />
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        prevPage={prevPage}
+        nextPage={nextPage}
+        setPage={setPage}
       />
-      {!loading && initialProducts.length !== 0 ? (
-        <Pagination
-          page={page}
-          totalPages={totalPages}
-          prevPage={prevPage}
-          nextPage={nextPage}
-          setPage={setPage}
-        />
-      ) : null}
     </div>
   );
 };
