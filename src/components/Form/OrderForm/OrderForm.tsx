@@ -22,6 +22,17 @@ type MyTextInputProps = {
   value?: string;
 };
 
+interface Values {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  city: string;
+  street: string;
+  number: string;
+  zipcode: string;
+}
+
 const MyTextInput = ({ label, ...props }: MyTextInputProps & React.InputHTMLAttributes<HTMLInputElement>) => {
   const [field, meta] = useField(props);
 
