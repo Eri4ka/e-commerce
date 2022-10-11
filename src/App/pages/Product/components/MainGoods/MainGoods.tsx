@@ -10,9 +10,7 @@ import cl from 'classnames';
 
 const MainGoods: React.FC = memo(() => {
   const products = useAppSelector(productsSelector);
-  const productsLoadingStatue = useAppSelector(
-    (state) => state.products.productsLoadingStatue
-  );
+  const productsLoadingStatue = useAppSelector((state) => state.products.productsLoadingStatue);
 
   return (
     <div className={cl('main-goods')}>

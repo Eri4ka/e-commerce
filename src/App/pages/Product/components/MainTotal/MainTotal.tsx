@@ -12,9 +12,7 @@ const MainTotal: React.FC = memo(() => {
     <div className={cl('main-total')}>
       <h2 className={cl('main-total__title')}>Total product</h2>
       <div className={cl('main-total__wrapper')}>
-        <div className={cl('main-total__wrapper-count')}>
-          {products ? products.length : 0}
-        </div>
+        <div className={cl('main-total__wrapper-count')}>{products ? products.length : 0}</div>
       </div>
     </div>
   );

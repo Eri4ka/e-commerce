@@ -1,13 +1,7 @@
-import React from 'react';
-
 import axios from 'axios';
 
 export const useHttp = () => {
-  // const [loading, setLoading] = React.useState<boolean>(false);
-
   const request = async (url: string, method: string = 'GET') => {
-    // setLoading(true);
-
     try {
       const response = await axios({ method, url });
 
@@ -16,10 +10,8 @@ export const useHttp = () => {
       }
 
       const data = await response.data;
-      // setLoading(false);
       return data;
     } catch (e) {
-      // setLoading(false);
       throw e;
     }
   };

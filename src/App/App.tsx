@@ -10,13 +10,13 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <main className="main">
+      <main className='main'>
         <Routes>
           {['/', '/product'].map((path, index) => {
             return <Route path={path} element={<Product />} key={index} />;
           })}
-          <Route path="/product/:id" element={<SingleProduct />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path='/product/:id' element={<SingleProduct />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
     </Router>

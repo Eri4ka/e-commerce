@@ -9,10 +9,7 @@ interface UsePaginationReturn {
   prevPage: () => void;
   setPage: (page: number) => void;
 }
-type UsePagination = (
-  contentPerPage: number,
-  count: number
-) => UsePaginationReturn;
+type UsePagination = (contentPerPage: number, count: number) => UsePaginationReturn;
 
 export const usePagination: UsePagination = (contentPerPage, count) => {
   const [page, setPage] = React.useState(1);
@@ -45,7 +42,7 @@ export const usePagination: UsePagination = (contentPerPage, count) => {
         setPage(num);
       }
     },
-    [pageCount]
+    [pageCount],
   );
   return {
     totalPages: pageCount,

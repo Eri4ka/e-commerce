@@ -11,9 +11,7 @@ const SingleProduct = () => {
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(
-    (state) => state.product.singleProductLoadingStatus
-  );
+  const loading = useAppSelector((state) => state.product.singleProductLoadingStatus);
 
   React.useEffect(() => {
     dispatch(fetchSingleProduct(id!));

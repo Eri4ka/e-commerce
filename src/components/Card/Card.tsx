@@ -12,19 +12,12 @@ export type CardProps = {
   category?: React.ReactNode;
 };
 
-export const Card: React.FC<CardProps> = ({
-  id,
-  category,
-  image,
-  title,
-  subtitle,
-  content,
-}) => {
+export const Card: React.FC<CardProps> = ({ id, category, image, title, subtitle, content }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="card" onClick={() => navigate(`/product/${id}`)}>
-      <img src={image} alt="" />
+    <div className='card' onClick={() => navigate(`/product/${id}`)}>
+      <img src={image} alt='' />
       <div className={cl('card__category')}>{category}</div>
       <div className={cl('card__title')}>{title}</div>
       <div className={cl('card__subtitle')}>{subtitle}</div>

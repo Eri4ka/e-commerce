@@ -12,13 +12,7 @@ type PaginationProps = {
   setPage: (page: number) => void;
 };
 
-const Pagination: React.FC<PaginationProps> = ({
-  page,
-  totalPages,
-  prevPage,
-  nextPage,
-  setPage,
-}) => {
+const Pagination: React.FC<PaginationProps> = ({ page, totalPages, prevPage, nextPage, setPage }) => {
   const pages: number[] = [];
 
   for (let i: number = 0; i < totalPages; i++) {
@@ -35,22 +29,14 @@ const Pagination: React.FC<PaginationProps> = ({
                 onClick={() => setPage(element + 1)}
                 key={element}
                 color={ButtonColor.none}
-                className={cl(
-                  'pagination__page',
-                  page === element + 1 && 'page_active'
-                )}
+                className={cl('pagination__page', page === element + 1 && 'page_active')}
               >
                 {element + 1}
               </Button>
-            ) : null
+            ) : null,
           )}
           {
-            <div
-              className={cl(
-                'pagination__page',
-                page > 3 && page !== totalPages && 'page_active'
-              )}
-            >
+            <div className={cl('pagination__page', page > 3 && page !== totalPages && 'page_active')}>
               {page > 3 && page !== totalPages ? page : '...'}
             </div>
           }
@@ -60,14 +46,11 @@ const Pagination: React.FC<PaginationProps> = ({
                 onClick={() => setPage(element + 1)}
                 key={element}
                 color={ButtonColor.none}
-                className={cl(
-                  'pagination__page',
-                  page === element + 1 && 'page_active'
-                )}
+                className={cl('pagination__page', page === element + 1 && 'page_active')}
               >
                 {element + 1}
               </Button>
-            ) : null
+            ) : null,
           )}
         </>
       );
@@ -79,10 +62,7 @@ const Pagination: React.FC<PaginationProps> = ({
               onClick={() => setPage(element + 1)}
               key={element}
               color={ButtonColor.none}
-              className={cl(
-                'pagination__page',
-                page === element + 1 && 'page_active'
-              )}
+              className={cl('pagination__page', page === element + 1 && 'page_active')}
             >
               {element + 1}
             </Button>
@@ -96,17 +76,9 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <div className={cl('pagination')}>
-      <Button
-        onClick={prevPage}
-        className={cl('pagination__prev')}
-        disabled={page === 1 && true}
-      />
+      <Button onClick={prevPage} className={cl('pagination__prev')} disabled={page === 1 && true} />
       {pageElems}
-      <Button
-        onClick={nextPage}
-        className={cl('pagination__next')}
-        disabled={page === totalPages && true}
-      />
+      <Button onClick={nextPage} className={cl('pagination__next')} disabled={page === totalPages && true} />
     </div>
   );
 };

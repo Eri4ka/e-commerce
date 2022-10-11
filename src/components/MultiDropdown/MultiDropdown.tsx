@@ -1,11 +1,7 @@
 import { useState, useEffect, memo } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@myredux/hooks';
-import {
-  filtersChanged,
-  categorySelector,
-  fetchCategories,
-} from '@myredux/slices/categorySlice';
+import { filtersChanged, categorySelector, fetchCategories } from '@myredux/slices/categorySlice';
 import cl from 'classnames';
 // import '@components/MultiDropdown/MultiDropdown.css'
 import './MultiDropdown.scss';
@@ -22,9 +18,7 @@ export type Option = {
 export const MultiDropdown: React.FC = memo(() => {
   const category = useAppSelector(categorySelector);
   const value = useAppSelector((state) => state.category.activeFilter);
-  const categoryLoadingStatus = useAppSelector(
-    (state) => state.category.categoryLoadingStatus
-  );
+  const categoryLoadingStatus = useAppSelector((state) => state.category.categoryLoadingStatus);
   const dispatch = useAppDispatch();
   const [dropDownMenu, setdropDownMenu] = useState(false);
 
@@ -41,25 +35,13 @@ export const MultiDropdown: React.FC = memo(() => {
 
   return (
     <div className={cl('dropdown')}>
-      <button
-        className={cl('dropdown-toggle', 'button')}
-        onClick={toggleDropDownMenu}
-        disabled={disabled}
-      >
-        {value === '' ? (
-          <div className={cl('dropdown-toggle__text')}>Filter</div>
-        ) : (
-          value
-        )}
+      <button className={cl('dropdown-toggle', 'button')} onClick={toggleDropDownMenu} disabled={disabled}>
+        {value === '' ? <div className={cl('dropdown-toggle__text')}>Filter</div> : value}
       </button>
       {!disabled && dropDownMenu ? (
         <div className={cl('dropdown-menu')}>
-          {category.map((item) => (
-            <button
-              className={cl('dropdown-item', 'button')}
-              key={item.key}
-              onClick={() => dispatch(filtersChanged(item))}
-            >
+          {category.map((item: Option) => (
+            <button className={cl('dropdown-item', 'button')} key={item.key} onClick={() => dispatch(filtersChanged(item))}>
               {item.value}
             </button>
           ))}
