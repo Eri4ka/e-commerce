@@ -4,24 +4,18 @@ import './SingleProductRelated.scss';
 import { Card } from '@components/Card';
 import { Loader, LoaderSize } from '@components/Loader';
 import { useAppDispatch, useAppSelector } from '@myredux/hooks';
-import {
-  relatedProductsSelector,
-  fetchRelatedProducts,
-} from '@myredux/slices/relatedProductsSlice';
-import { selectAll } from '@myredux/slices/singleProductSlice';
+import { relatedProductsSelector, fetchRelatedProducts } from '@myredux/slices/relatedProductsSlice';
 import cl from 'classnames';
 import { Product } from 'src/App/pages/Product/components/MainContent/MainContent';
 
 const SingleProductRelated: React.FC = memo(() => {
   const dispatch = useAppDispatch();
   const relatedProducts = useAppSelector(relatedProductsSelector);
-  const singleProduct = useAppSelector(selectAll) as Product[];
-  const loading = useAppSelector(
-    (state) => state.relatedProducts.relatedProductsLoadingStatus
-  );
+  const singleProduct = useAppSelector((state) => state.product.product);
+  const loading = useAppSelector((state) => state.relatedProducts.relatedProductsLoadingStatus);
 
   React.useEffect(() => {
-    dispatch(fetchRelatedProducts(singleProduct[0].category));
+    dispatch(fetchRelatedProducts(singleProduct.category));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleProduct]);
 
@@ -29,7 +23,7 @@ const SingleProductRelated: React.FC = memo(() => {
     return (
       <div className={cl('main-goods')}>
         <div className={cl('main-goods__grid')}>
-          {relatedProducts.map((item: any) => {
+          {relatedProducts.map((item: Product) => {
             return (
               <Card
                 id={item.id}
@@ -48,9 +42,7 @@ const SingleProductRelated: React.FC = memo(() => {
   };
 
   const renderedProducts = loading === 'idle' && renderProducts();
-  const loader = loading === 'loading' && (
-    <Loader size={LoaderSize.l} className={'loader'} />
-  );
+  const loader = loading === 'loading' && <Loader size={LoaderSize.l} className={'loader'} />;
 
   return (
     <div className={cl('related')}>

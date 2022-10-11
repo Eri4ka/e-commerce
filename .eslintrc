@@ -9,6 +9,11 @@
         "error",
         {
           "endOfLine": "auto",
+          "printWidth": 150,
+          "jsxSingleQuote": true,
+          "trailingComma": "all",
+          "bracketSpacing": true,
+          "tabWidth": 2,
         }
       ],
       "import/order": [

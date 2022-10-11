@@ -1,26 +1,22 @@
 import { useHttp } from '@hooks/http.hook';
-import {
-  createSlice,
-  createAsyncThunk,
-  createEntityAdapter,
-} from '@reduxjs/toolkit';
+import { Product } from '@pages/Product/components/MainContent/MainContent';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { RootState } from '../store';
+interface ProductState {
+  product: Product;
+  singleProductLoadingStatus: string;
+}
 
-const singleProductAdapter = createEntityAdapter({});
-
-const initialState = singleProductAdapter.getInitialState({
+const initialState = {
+  product: {},
   singleProductLoadingStatus: 'idle',
-});
+} as ProductState;
 
-export const fetchSingleProduct = createAsyncThunk(
-  'product/fetchSingleProduct',
-  async (id: string | number) => {
-    const { request } = useHttp();
-    const response = await request(`https://fakestoreapi.com/products/${id}`);
-    return [response];
-  }
-);
+export const fetchSingleProduct = createAsyncThunk('product/fetchSingleProduct', async (id: string | number) => {
+  const { request } = useHttp();
+  const response = await request(`https://fakestoreapi.com/products/${id}`);
+  return response;
+});
 
 const singleProductSlice = createSlice({
   name: 'product',
@@ -33,7 +29,7 @@ const singleProductSlice = createSlice({
       })
       .addCase(fetchSingleProduct.fulfilled, (state, action) => {
         state.singleProductLoadingStatus = 'idle';
-        singleProductAdapter.setAll(state, action.payload);
+        state.product = action.payload;
       })
       .addCase(fetchSingleProduct.rejected, (state) => {
         state.singleProductLoadingStatus = 'error';
@@ -45,7 +41,3 @@ const singleProductSlice = createSlice({
 const { reducer } = singleProductSlice;
 
 export default reducer;
-
-export const { selectAll } = singleProductAdapter.getSelectors(
-  (state: RootState) => state.product
-);

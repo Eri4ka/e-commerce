@@ -18,32 +18,14 @@ export type ButtonProps = React.PropsWithChildren<{
 }> &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button: React.FC<ButtonProps> = ({
-  loading,
-  color = ButtonColor.primary,
-  className,
-  children,
-  ...props
-}) => {
+export const Button: React.FC<ButtonProps> = ({ loading, color = ButtonColor.primary, className, children, ...props }) => {
   return (
     <button
-      className={cl(
-        'button',
-        `button_color-${color}`,
-        loading || props.disabled ? 'button_disabled' : null,
-        className
-      )}
+      className={cl('button', `button_color-${color}`, loading || props.disabled ? 'button_disabled' : null, className)}
       disabled={loading}
       {...props}
     >
-      {loading && (
-        <Loader
-          loading={loading}
-          size={LoaderSize.s}
-          className={cl('test-class')}
-          disabled={loading}
-        />
-      )}
+      {loading && <Loader loading={loading} size={LoaderSize.s} className={cl('test-class')} disabled={loading} />}
       {children}
     </button>
   );

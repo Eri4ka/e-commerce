@@ -12,53 +12,26 @@ export const HeaderDesktop = () => {
   return (
     <header className={cl('header-desktop')}>
       <div className={cl('header-desktop__logo')}>
-        <img className={cl('header-desktop__img')} src={logo} alt="logo" />
-        <img
-          className={cl('header-desktop__text')}
-          src={logoText}
-          alt="logo-text"
-        />
+        <img className={cl('header-desktop__img')} src={logo} alt='logo' />
+        <img className={cl('header-desktop__text')} src={logoText} alt='logo-text' />
       </div>
       <div className={cl('section')}>
-        <NavLink
-          to={location.pathname === '/' ? '/' : '/product'}
-          className={({ isActive }) =>
-            isActive ? 'section_active' : undefined
-          }
-        >
+        <NavLink to={location.pathname === '/' ? '/' : '/product'} className={({ isActive }) => (isActive ? 'section_active' : undefined)}>
           Product
         </NavLink>
-        <NavLink
-          end
-          to="/services"
-          className={({ isActive }) =>
-            isActive ? 'section_active' : undefined
-          }
-        >
+        <NavLink end to='/services' className={({ isActive }) => (isActive ? 'section_active' : undefined)}>
           Services
         </NavLink>
-        <NavLink
-          end
-          to="/article"
-          className={({ isActive }) =>
-            isActive ? 'section_active' : undefined
-          }
-        >
+        <NavLink end to='/article' className={({ isActive }) => (isActive ? 'section_active' : undefined)}>
           Article
         </NavLink>
-        <NavLink
-          end
-          to="/about"
-          className={({ isActive }) =>
-            isActive ? 'section_active' : undefined
-          }
-        >
+        <NavLink end to='/about' className={({ isActive }) => (isActive ? 'section_active' : undefined)}>
           About Us
         </NavLink>
       </div>
-      <div className="icons">
-        <img className={cl('icons__bag')} src={bag} alt="bag" />
-        <img className={cl('icons__user')} src={user} alt="user" />
+      <div className='icons'>
+        <img className={cl('icons__bag')} src={bag} alt='bag' />
+        <img className={cl('icons__user')} src={user} alt='user' />
       </div>
     </header>
   );

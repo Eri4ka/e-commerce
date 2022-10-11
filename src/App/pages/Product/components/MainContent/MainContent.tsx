@@ -7,11 +7,7 @@ import { useMobile } from '@hooks/useMobile';
 import { usePagination } from '@hooks/usePagination';
 import { MOBILE_VIEW, ITEMS_PER_PAGE } from '@lib/constants';
 import { useAppDispatch, useAppSelector } from '@myredux/hooks';
-import {
-  fetchProducts,
-  fetchCategoryProducts,
-  totalPagesSelector,
-} from '@myredux/slices/productsSlice';
+import { fetchProducts, fetchCategoryProducts, totalPagesSelector } from '@myredux/slices/productsSlice';
 
 import MainGoods from '../MainGoods';
 import MainSeacrh from '../MainSeacrh';
@@ -33,13 +29,8 @@ const MainContent: React.FC = () => {
   const searchValue = useAppSelector((state) => state.products.searchValue);
   const dispatch = useAppDispatch();
 
-  const { isMobile } = useMobile(
-    window.innerWidth < MOBILE_VIEW ? true : false
-  );
-  const { nextPage, prevPage, page, setPage, totalPages } = usePagination(
-    searchValue.length > 0 ? 20 : ITEMS_PER_PAGE,
-    currentPages
-  );
+  const { isMobile } = useMobile(window.innerWidth < MOBILE_VIEW ? true : false);
+  const { nextPage, prevPage, page, setPage, totalPages } = usePagination(searchValue.length > 0 ? 20 : ITEMS_PER_PAGE, currentPages);
 
   React.useEffect(() => {
     if (value === '') {
@@ -52,20 +43,14 @@ const MainContent: React.FC = () => {
   }, [page, value, searchValue]);
 
   return (
-    <div className="main-content">
-      <div className="main-filters">
+    <div className='main-content'>
+      <div className='main-filters'>
         <MainSeacrh />
         {!isMobile ? <MultiDropdown /> : null}
       </div>
       <MainTotal />
       <MainGoods />
-      <Pagination
-        page={page}
-        totalPages={totalPages}
-        prevPage={prevPage}
-        nextPage={nextPage}
-        setPage={setPage}
-      />
+      <Pagination page={page} totalPages={totalPages} prevPage={prevPage} nextPage={nextPage} setPage={setPage} />
     </div>
   );
 };

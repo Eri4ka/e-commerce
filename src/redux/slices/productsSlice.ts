@@ -1,34 +1,31 @@
 import { useHttp } from '@hooks/http.hook';
 import { ITEMS_PER_PAGE } from '@lib/constants';
-import {
-  createSlice,
-  createAsyncThunk,
-  createEntityAdapter,
-  createSelector,
-} from '@reduxjs/toolkit';
+import { Product } from '@pages/Product/components/MainContent/MainContent';
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 
-import { RootState } from '../store';
+import { RootState, LoadingStatus } from '../store';
 
-const productsAdapter = createEntityAdapter({});
-const initialState = productsAdapter.getInitialState({
+interface ProductsState {
+  products: Product[];
+  productsLoadingStatue: LoadingStatus;
+  searchValue: string;
+}
+
+const initialState = {
+  products: [],
   productsLoadingStatue: 'idle',
   searchValue: '',
-});
+} as ProductsState;
 
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
-  async (page: number, { getState }) => {
-    const { request } = useHttp();
-    const state = getState() as RootState;
-    if (state.products.searchValue === '') {
-      return await request(
-        `https://fakestoreapi.com/products?limit=${ITEMS_PER_PAGE * page}`
-      );
-    } else {
-      return await request('https://fakestoreapi.com/products');
-    }
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async (page: number, { getState }) => {
+  const { request } = useHttp();
+  const state = getState() as RootState;
+  if (state.products.searchValue === '') {
+    return await request(`https://fakestoreapi.com/products?limit=${ITEMS_PER_PAGE * page}`);
+  } else {
+    return await request('https://fakestoreapi.com/products');
   }
-);
+});
 
 export const fetchCategoryProducts = createAsyncThunk(
   'products/fetchCategoryProducts',
@@ -37,17 +34,11 @@ export const fetchCategoryProducts = createAsyncThunk(
     const state = getState() as RootState;
     const { request } = useHttp();
     if (state.products.searchValue === '') {
-      return await request(
-        `https://fakestoreapi.com/products/category/${value}?limit=${
-          ITEMS_PER_PAGE * page
-        }`
-      );
+      return await request(`https://fakestoreapi.com/products/category/${value}?limit=${ITEMS_PER_PAGE * page}`);
     } else {
-      return await request(
-        `https://fakestoreapi.com/products/category/${value}`
-      );
+      return await request(`https://fakestoreapi.com/products/category/${value}`);
     }
-  }
+  },
 );
 
 const productsSlice = createSlice({
@@ -65,7 +56,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.productsLoadingStatue = 'idle';
-        productsAdapter.setAll(state, action.payload);
+        state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state) => {
         state.productsLoadingStatue = 'error';
@@ -76,7 +67,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchCategoryProducts.fulfilled, (state, action) => {
         state.productsLoadingStatue = 'idle';
-        productsAdapter.setAll(state, action.payload);
+        state.products = action.payload;
       })
       .addCase(fetchCategoryProducts.rejected, (state) => {
         state.productsLoadingStatue = 'error';
@@ -87,28 +78,24 @@ const productsSlice = createSlice({
 
 const { actions, reducer } = productsSlice;
 
-const { selectAll, selectTotal } = productsAdapter.getSelectors<RootState>(
-  (state) => state.products
-);
-
 export const productsSelector = createSelector(
   (state: RootState) => state.products.searchValue,
-  selectAll,
+  (state: RootState) => state.products.products,
   (searchValue, products) => {
     if (searchValue) {
-      return products.filter((item: any) => {
+      return products.filter((item: Product) => {
         return item.title.toLowerCase().includes(searchValue);
       });
     } else {
       return products;
     }
-  }
+  },
 );
 
 export const totalPagesSelector = createSelector(
   (state: RootState) => state.products.searchValue,
   (state: RootState) => state.category.activeFilter,
-  selectTotal,
+  (state: RootState) => state.products.products.length,
   (searchValue, activeFilter, prodsCount) => {
     if (searchValue.length > 0) {
       return prodsCount;
@@ -126,7 +113,7 @@ export const totalPagesSelector = createSelector(
           return 20;
       }
     }
-  }
+  },
 );
 
 export default reducer;

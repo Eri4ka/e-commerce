@@ -8,15 +8,11 @@ export const HeaderMobile = () => {
   return (
     <header className={cl('header-mobile')}>
       <div className={cl('header-mobile__logo')}>
-        <img className={cl('header-mobile__img')} src={logo} alt="logo" />
-        <img
-          className={cl('header-mobile__text')}
-          src={logoText}
-          alt="logo-text"
-        />
+        <img className={cl('header-mobile__img')} src={logo} alt='logo' />
+        <img className={cl('header-mobile__text')} src={logoText} alt='logo-text' />
       </div>
       <div className={cl('menu')}>
-        <img src={mobileMenu} alt="bag" />
+        <img src={mobileMenu} alt='bag' />
       </div>
     </header>
   );

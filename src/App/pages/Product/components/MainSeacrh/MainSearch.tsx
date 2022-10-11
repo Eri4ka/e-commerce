@@ -19,14 +19,9 @@ const MainSearch: React.FC = () => {
         placeholder={'Search property'}
         onChange={(value: string) => setValue(value)}
         className={cl('main-search__input')}
-        onKeyDown={(e) =>
-          e.key === 'Enter' ? dispatch(getSearchValue(value)) : null
-        }
+        onKeyDown={(e) => (e.key === 'Enter' ? dispatch(getSearchValue(value)) : null)}
       />
-      <Button
-        onClick={() => dispatch(getSearchValue(value))}
-        className={cl('main-search__submit')}
-      >
+      <Button onClick={() => dispatch(getSearchValue(value))} className={cl('main-search__submit')}>
         Find Now
       </Button>
     </div>

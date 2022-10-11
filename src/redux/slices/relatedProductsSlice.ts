@@ -1,27 +1,22 @@
 import { useHttp } from '@hooks/http.hook';
-import { RootState } from '@myredux/store';
-import {
-  createEntityAdapter,
-  createSlice,
-  createAsyncThunk,
-  createSelector,
-} from '@reduxjs/toolkit';
+import { RootState, LoadingStatus } from '@myredux/store';
+import { Product } from '@pages/Product/components/MainContent/MainContent';
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 
-const relatedProductsAdapter = createEntityAdapter({});
+interface RelatedProductsState {
+  relatedProducts: Product[];
+  relatedProductsLoadingStatus: LoadingStatus;
+}
 
-const initialState = relatedProductsAdapter.getInitialState({
+const initialState = {
+  relatedProducts: [],
   relatedProductsLoadingStatus: 'idle',
-});
+} as RelatedProductsState;
 
-export const fetchRelatedProducts = createAsyncThunk(
-  'product/fetchRelatedProduct',
-  async (category: string) => {
-    const { request } = useHttp();
-    return await request(
-      `https://fakestoreapi.com/products/category/${category}`
-    );
-  }
-);
+export const fetchRelatedProducts = createAsyncThunk('product/fetchRelatedProduct', async (category: string) => {
+  const { request } = useHttp();
+  return await request(`https://fakestoreapi.com/products/category/${category}`);
+});
 
 const relatedProductsSlice = createSlice({
   name: 'relatedProducts',
@@ -34,7 +29,7 @@ const relatedProductsSlice = createSlice({
       })
       .addCase(fetchRelatedProducts.fulfilled, (state, action) => {
         state.relatedProductsLoadingStatus = 'idle';
-        relatedProductsAdapter.setAll(state, action.payload);
+        state.relatedProducts = action.payload;
       })
       .addCase(fetchRelatedProducts.rejected, (state) => {
         state.relatedProductsLoadingStatus = 'error';
@@ -46,16 +41,12 @@ const relatedProductsSlice = createSlice({
 const { reducer } = relatedProductsSlice;
 export default reducer;
 
-const { selectAll } = relatedProductsAdapter.getSelectors(
-  (state: RootState) => state.relatedProducts
-);
-
 export const relatedProductsSelector = createSelector(
-  (state: RootState) => state.product.ids,
-  selectAll,
+  (state: RootState) => state.product.product,
+  (state: RootState) => state.relatedProducts.relatedProducts,
   (product, related) => {
     return related.filter((elem: any) => {
-      return elem.id !== product[0];
+      return elem.id !== product.id;
     });
-  }
+  },
 );
