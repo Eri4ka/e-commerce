@@ -9,7 +9,7 @@ import Cart from '@pages/Cart';
 import CheckOut from '@pages/CheckOut';
 import SignIn from '@pages/SignIn/SignIn';
 import SignUp from '@pages/SignUp';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
 import NotFoundPage from './pages/NotFoundPage';
 import Product from './pages/Product';
