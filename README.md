@@ -17,12 +17,11 @@ https://e-commerce-eri.herokuapp.com - Deployed on Heroku with HashRouter
 
 ## Mobile
 
-<div align="center">
-    <video src='./public/video/Mobile.mp4' type="video/mp4" width="374px" controls>
-</div>
+https://user-images.githubusercontent.com/83443130/200395655-cbe3a646-1e0d-4cc1-a55e-b13fc6de87c6.mp4
 
----
 
 ## Desktop
 
-<video src='./public/video/desktop.mp4' type="video/mp4" width="100%" controls>
+
+https://user-images.githubusercontent.com/83443130/200396849-a2b7bae1-7287-490d-bdd9-25d0ad0f6ff7.mp4
+
