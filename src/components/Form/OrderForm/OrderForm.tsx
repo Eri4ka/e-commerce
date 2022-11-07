@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
 import { Button } from '@components/Button';
-import { useAddBucketMutation } from '@myredux/api/bucketApi';
-import { useAppSelector } from '@myredux/hooks';
+import { useAppDispatch, useAppSelector } from '@myredux/hooks';
+import { fetchAddOrder } from '@myredux/slices/orderSlice';
 import { Formik, Form, useField } from 'formik';
 import { CSSTransition } from 'react-transition-group';
 import * as Yup from 'yup';
@@ -13,7 +13,7 @@ type OrderFormType = {
   toggle: boolean;
 };
 
-type MyTextInputProps = {
+export type MyTextInputProps = {
   label: string;
   name: string;
   validate?: (value: any) => undefined | string | Promise<any>;
@@ -21,17 +21,6 @@ type MyTextInputProps = {
   multiple?: boolean;
   value?: string;
 };
-
-interface Values {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  city: string;
-  street: string;
-  number: string;
-  zipcode: string;
-}
 
 const MyTextInput = ({ label, ...props }: MyTextInputProps & React.InputHTMLAttributes<HTMLInputElement>) => {
   const [field, meta] = useField(props);
@@ -46,9 +35,24 @@ const MyTextInput = ({ label, ...props }: MyTextInputProps & React.InputHTMLAttr
 };
 
 const OrderForm: React.FC<OrderFormType> = memo(({ onHandleToggle, toggle }) => {
-  const [addBucket] = useAddBucketMutation();
-  const singleProduct = useAppSelector((state) => state.product.product);
-  console.log('mount');
+  const { id, title, image, price } = useAppSelector((state) => state.product.product);
+  const user = useAppSelector((state) => state.user.user);
+  const ordersAddLoadingStatus = useAppSelector((state) => state.orders.ordersAddLoadingStatus);
+  const dispatch = useAppDispatch();
+
+  const initialValues = {
+    firstName: user?.firstName ? user.firstName : '',
+    lastName: user?.lastName ? user.lastName : '',
+    email: user?.email ? user.email : '',
+    phone: user?.phone ? user.phone : '',
+    city: user?.city ? user.city : '',
+    street: user?.street ? user.street : '',
+    number: user?.number ? user.number : '',
+    zipcode: user?.zipcode ? user.zipcode : '',
+    delivery: 'Courier',
+    payment: 'Payment upon receipt',
+  };
+
   return (
     <CSSTransition in={toggle} timeout={200} classNames='order-form' unmountOnExit>
       <div className='order-form'>
@@ -58,16 +62,7 @@ const OrderForm: React.FC<OrderFormType> = memo(({ onHandleToggle, toggle }) => 
           </button>
           <h2>Creating an order</h2>
           <Formik
-            initialValues={{
-              firstName: '',
-              lastName: '',
-              email: '',
-              phone: '',
-              city: '',
-              street: '',
-              number: '',
-              zipcode: '',
-            }}
+            initialValues={initialValues}
             validationSchema={Yup.object({
               firstName: Yup.string().required('Required'),
               lastName: Yup.string().required('Required'),
@@ -79,18 +74,15 @@ const OrderForm: React.FC<OrderFormType> = memo(({ onHandleToggle, toggle }) => 
               zipcode: Yup.number().typeError('Not a valid').required('Required'),
             })}
             onSubmit={(values) => {
-              const bucket = {
-                userId: 5,
-                date: '2022-02-03',
-                products: [
-                  {
-                    productId: singleProduct.id,
-                    quantity: 1,
-                  },
-                ],
+              const order = {
+                date: new Date(),
+                ...values,
+                products: [{ id, title, image, price }],
+                total: 1,
+                sum: price,
               };
-              addBucket(bucket);
-              console.log(bucket);
+              console.log(order);
+              dispatch(fetchAddOrder(order)).then(() => onHandleToggle());
             }}
           >
             <Form>
@@ -108,10 +100,14 @@ const OrderForm: React.FC<OrderFormType> = memo(({ onHandleToggle, toggle }) => 
                 <MyTextInput label='Street' id='street' name='street' placeholder='Nevskiy' />
                 <MyTextInput label='Number' id='number' name='number' placeholder='11' />
                 <MyTextInput label='Zipcode' id='zipcode' name='zipcode' placeholder='4722458' />
+                <MyTextInput label='Delivery type' id='delivery' name='delivery' disabled />
+                <MyTextInput label='Payment type' id='payment' name='payment' disabled />
               </div>
 
               <div className='order-form-content__submit'>
-                <Button type='submit'>Create</Button>
+                <Button type='submit' loading={ordersAddLoadingStatus === 'loading'}>
+                  Create
+                </Button>
               </div>
             </Form>
           </Formik>

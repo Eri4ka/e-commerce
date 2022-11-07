@@ -1,0 +1,27 @@
+@import "@styles/variables.scss";
+
+.account-nav__item {
+    position: relative;
+    padding-left: 20px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+
+    &-active {
+        color: $border-color;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0px;
+            height: 100%;
+            border-left: 3px solid $border-color;
+        }
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .account-nav__item {
+        width: 25%;
+    }
+}

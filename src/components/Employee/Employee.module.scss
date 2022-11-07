@@ -1,0 +1,39 @@
+@import "@styles/variables.scss";
+
+.employee {
+    &__image {
+        width: 394px;
+        height: 360px;
+        object-fit: contain;
+        margin-bottom: 26px;
+    }
+    &__name {
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 34px;
+        margin-bottom: 6px;
+    }
+    &__position {
+        font-weight: 500;
+        line-height: 32px;
+        color: $scnd-text-color;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .employee {
+        &__image {
+            width: 327px;
+            height: 299px;
+            margin-bottom: 14px;
+        }
+        &__name {
+            font-size: 14px;
+            line-height: 18px;
+        }
+        &__position {
+            font-size: 12px;
+            line-height: 21px;
+        }
+    }
+}

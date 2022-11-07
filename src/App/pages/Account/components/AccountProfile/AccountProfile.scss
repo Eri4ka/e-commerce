@@ -1,0 +1,17 @@
+@import "@styles/variables.scss";
+
+.account-content {
+
+    &__head {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .account-content {
+
+        &__head {
+            font-size: 24px;
+        }
+    }
+}

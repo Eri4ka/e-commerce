@@ -3,9 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* height: 347px; */
     text-align: center;
-    /* padding: 100px 0 80px 0; */
     margin-bottom: 80px;
 
     &__subtitle {
@@ -16,8 +14,6 @@
 
 @media screen and (max-width: 991px) {
     .main-title {
-        /* height: 211px; */
-        /* padding: 50px 24px 32px 24px; */
         margin-bottom: 32px;
     }
 }

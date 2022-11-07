@@ -1,0 +1,43 @@
+@import "@styles/variables.scss";
+
+.account-content {
+
+    &__field {
+        margin-bottom: 20px;
+    }
+
+    &__label {
+        font-size: 16px;
+        color: $scnd-text-color;
+    }
+
+    &__item {
+        display: flex;
+        line-height: 30px;
+        height: 30px;
+    }
+
+    &__text {
+        margin-right: 15px;
+    }
+
+    &__change {
+        cursor: pointer;
+        color: $border-color;
+        border-bottom: 1px solid $scnd-text-color;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+            border-bottom: 1px solid $text-color;
+        }
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .account-content {
+
+        &__label {
+            font-size: 12px;
+        }
+    }
+}

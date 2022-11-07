@@ -10,6 +10,14 @@
     color: $text-color;
 }
 
+#root {
+  overflow-x: hidden;
+}
+
+.link {
+  text-decoration: none;
+}
+
 h1 {
   font-weight: 700;
   font-size: 64px;

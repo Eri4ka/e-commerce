@@ -1,0 +1,120 @@
+@import "@styles/variables.scss";
+
+.mission {
+    margin-bottom: 180px;
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    &__content {
+        width: 40%;
+    }
+    &__badge {
+        font-weight: 700;
+        color: #FFB23F;
+        margin-bottom: 14px;
+    }
+    &__head {
+        font-size: 44px;
+        font-weight: 700;
+        margin-bottom: 50px;
+        line-height: 57px;
+    }
+    &__block {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__info {
+        width: 45%;
+    }
+    &-achievement {
+        &__head {
+            font-size: 44px;
+            font-weight: 700;
+            line-height: 57px;
+            margin-bottom: 10px;
+        }
+        &__text {
+            color: $scnd-text-color;
+            font-weight: 500;
+        }
+    }
+    &-block {
+        display: flex;
+        margin-bottom: 30px;
+        &__image {
+            width: 62px;
+            height: 62px;
+        }
+        &__content {
+            margin-left: 25px;
+        }
+        &__head {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        &__text {
+            color: $scnd-text-color;
+            font-weight: 500;
+            line-height: 32px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .mission {
+        margin-bottom: 64px;
+        &__content {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        &__badge {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        &__head {
+            font-size: 24px;
+            margin-bottom: 30px;
+            line-height: 31px;
+        }
+        &__info {
+            width: 100%;
+        }
+        &-achievement {
+            &__head {
+                font-size: 24px;
+                line-height: 31px;
+                margin-bottom: 4px;
+            }
+            &__text {
+                font-size: 14px;
+                line-height: 25px;
+            }
+        }
+        &-block {
+            margin-bottom: 20px;
+            &__image {
+                width: 44px;
+                height: 44px;
+            }
+            &__content {
+                margin-left: 20px;
+            }
+            &__head {
+                font-size: 16px;
+                line-height: 21px;
+            }
+            &__text {
+                font-size: 14px;
+                line-height: 25px;
+                display: block;
+            }
+        }
+    }
+}

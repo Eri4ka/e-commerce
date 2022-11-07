@@ -1,0 +1,37 @@
+@import "@styles/variables.scss";
+
+.account {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &-nav {
+        width: 20%;
+
+        &__list {
+            list-style: none;
+        }
+    }
+
+    &-content {
+        width: 65%;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .account {
+    
+        &-nav {
+            width: 100%;
+            margin-bottom: 25px;
+
+            &__list {
+                display: flex;
+            }
+        }
+    
+        &-content {
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,85 @@
+@import "@styles/variables.scss";
+
+.auth {
+    display: flex;
+    justify-content: center;
+    
+    &__wrapper {
+        max-width: 400px;
+        padding: 40px;
+        box-shadow: 0px 4px 120px rgb(175 173 181 / 15%);
+    }
+    
+    &__fields {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__block {
+        width: 100%;
+        padding-top: 15px;
+    }
+
+    &__label {
+        margin-bottom: 5px;
+    }
+
+    &__input {
+        width: 100%;
+        text-indent: 15px;
+        height: 40px;
+        outline: none;
+        border: none;
+        box-shadow: 0px 4px 120px rgb(175 173 181 / 15%);
+
+        &:focus {
+            border: 1px solid $border-color;
+        }
+    }
+
+    &__error {
+        color: $red;
+        margin-top: 5px;
+        font-size: 16px;
+    }
+
+    &-submit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 15px;
+
+        &__text {
+            margin-top: 5px;
+            color: $scnd-text-color;
+        }
+
+        &__link {
+            color: $border-color;
+            text-decoration: none;
+        }
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .auth {
+
+        &__wrapper {
+            padding: 0;
+            box-shadow: none;
+        }
+
+        &__head {
+            font-size: 24px;
+        }
+
+        &__error {
+            font-size: 14px;
+        }
+    }
+  }

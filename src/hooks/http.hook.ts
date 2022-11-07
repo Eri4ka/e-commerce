@@ -1,16 +1,16 @@
 import axios from 'axios';
 
 export const useHttp = () => {
-  const request = async (url: string, method: string = 'GET') => {
+  const request = async (url: string, method: string = 'GET', data?: any) => {
     try {
-      const response = await axios({ method, url });
+      const response = await axios({ method, url, data });
 
       if (!response.status) {
         throw new Error(`Could not fetch ${url}, status: ${response.status}`);
       }
 
-      const data = await response.data;
-      return data;
+      const responseData = await response.data;
+      return responseData;
     } catch (e) {
       throw e;
     }
