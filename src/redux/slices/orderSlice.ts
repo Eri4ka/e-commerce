@@ -49,7 +49,6 @@ export const fetchAddOrder = createAsyncThunk('orders/fetchAddOrder', async (dat
   const { request } = useHttp();
   const state = getState() as RootState;
   const user = state.user.user;
-  console.log(data);
 
   return await request(`${BASE_URL}/buckets`, 'POST', {
     userId: user ? user.id : nanoid(),

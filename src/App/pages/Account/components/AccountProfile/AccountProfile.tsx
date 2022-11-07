@@ -6,14 +6,17 @@ import { Button } from '@components/Button';
 import FieldForm from '@components/Form/FieldForm';
 import { Loader, LoaderSize } from '@components/Loader';
 import { useToggle } from '@hooks/useToggle';
+import { IUser } from '@myredux/api';
 import { useAppDispatch, useAppSelector } from '@myredux/hooks';
 import { logOut } from '@myredux/slices/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 import AccountProfileField from './components/AccountProfileField';
 
 type AccountProfileProps = {
   id: string;
   activeTab: string;
+  user: IUser | null;
 };
 
 export interface IActiveField {
@@ -21,17 +24,22 @@ export interface IActiveField {
   title: string;
 }
 
-const AccountProfile: React.FC<AccountProfileProps> = ({ id, activeTab }) => {
-  const user = useAppSelector((state) => state.user.user);
+const AccountProfile: React.FC<AccountProfileProps> = ({ user, id, activeTab }) => {
   const dispatch = useAppDispatch();
   const [activeField, setActiveField] = useState<IActiveField>({ id: '', title: '' });
   const { toggle, onHandleToggle } = useToggle();
+  const navigate = useNavigate();
 
   const onActiveField = useCallback((props: IActiveField) => {
     onHandleToggle();
     setActiveField(props);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onExit = () => {
+    dispatch(logOut());
+    navigate('/signin');
+  };
 
   return id === activeTab ? (
     <div className='account-content__profile'>
@@ -51,7 +59,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ id, activeTab }) => {
           <AccountProfileField id='zipcode' title='Zipcode' text={user?.zipcode} onActiveField={onActiveField} exists={user.zipcode ? true : false} />
         </>
       )}
-      <Button onClick={() => dispatch(logOut())}>Logout</Button>
+      <Button onClick={onExit}>Logout</Button>
       <FieldForm onHandleToggle={onHandleToggle} toggle={toggle} activeField={activeField} />
     </div>
   ) : null;

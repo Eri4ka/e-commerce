@@ -9,6 +9,7 @@ import { fetchAddOrder } from '@myredux/slices/orderSlice';
 import CartInfo from '@pages/Cart/components/CartInfo';
 import cl from 'classnames';
 import { Formik, Form, useField } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import CheckOutList from './components/CheckOutList';
@@ -41,6 +42,7 @@ const CheckOut = memo(() => {
   const cartItems = useAppSelector(cartSelector);
   const { total, sum } = useAppSelector(totalSelector);
   const { toggle, onHandleToggle } = useToggle();
+  const navigate = useNavigate();
 
   const loading = ordersAddLoadingStatus === 'loading';
 
@@ -96,7 +98,7 @@ const CheckOut = memo(() => {
             total,
             sum,
           };
-          dispatch(fetchAddOrder(order)).then(() => dispatch(fetchDeleteCart()));
+          dispatch(fetchAddOrder(order)).then(() => dispatch(fetchDeleteCart()).then(() => navigate('/cart')));
         }}
       >
         <Form>

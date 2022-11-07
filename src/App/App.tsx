@@ -9,11 +9,13 @@ import Cart from '@pages/Cart';
 import CheckOut from '@pages/CheckOut';
 import SignIn from '@pages/SignIn/SignIn';
 import SignUp from '@pages/SignUp';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter, BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import NotFoundPage from './pages/NotFoundPage';
 import Product from './pages/Product';
 import SingleProduct from './pages/SingleProduct';
+
+const Router = process.env.NODE_ENV !== 'production' ? BrowserRouter : HashRouter;
 
 const App = () => {
   const userId = localStorage.getItem('userId');

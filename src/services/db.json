@@ -507,6 +507,62 @@
       "total": 2,
       "sum": "78.29",
       "id": 9
+    },
+    {
+      "userId": 1,
+      "date": "2022-11-07T17:39:32.250Z",
+      "firstName": "Eri",
+      "lastName": "Khasanov",
+      "email": "khasanoveri@mail.ru",
+      "phone": "89875441488",
+      "city": "Ufa",
+      "street": "Pushkin",
+      "number": "13",
+      "zipcode": "450085",
+      "delivery": "Courier",
+      "payment": "Payment upon receipt",
+      "products": [
+        {
+          "id": 2,
+          "title": "Mens Casual Premium Slim Fit T-Shirts ",
+          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+          "price": 22.3
+        },
+        {
+          "id": 1,
+          "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+          "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+          "price": 109.95
+        }
+      ],
+      "total": 2,
+      "sum": "132.25",
+      "id": 10
+    },
+    {
+      "userId": 1,
+      "date": "2022-11-07T18:17:28.416Z",
+      "firstName": "Eri",
+      "lastName": "Khasanov",
+      "email": "khasanoveri@mail.ru",
+      "phone": "89875441488",
+      "city": "Ufa",
+      "street": "Pushkin",
+      "number": "13",
+      "zipcode": "450085",
+      "delivery": "Courier",
+      "payment": "Payment upon receipt",
+      "products": [
+        {
+          "id": 2,
+          "title": "Mens Casual Premium Slim Fit T-Shirts ",
+          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+          "price": 22.3
+        }
+      ],
+      "total": 1,
+      "sum": "22.30",
+      "id": 11
     }
   ],
   "users": [
