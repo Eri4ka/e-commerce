@@ -9,7 +9,6 @@ import emp6 from '@images/employees/emp6.png';
 import styles from './AboutTeam.module.scss';
 
 const AboutTeam = () => {
-  console.log(emp1);
   return (
     <div className={styles.team}>
       <p className={styles.team__badge}>Our team</p>
