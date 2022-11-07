@@ -453,31 +453,6 @@
       "id": 6
     },
     {
-      "userId": "H3erh4GCC1JHQUNM8L8PL",
-      "date": "2022-11-05T16:02:37.077Z",
-      "firstName": "as",
-      "lastName": "as",
-      "email": "tesst@mail.ru",
-      "phone": "1212",
-      "city": "ds",
-      "street": "sd",
-      "number": "21",
-      "zipcode": "12",
-      "delivery": "Courier",
-      "payment": "Payment upon receipt",
-      "products": [
-        {
-          "id": 3,
-          "title": "Mens Cotton Jacket",
-          "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-          "price": 55.99
-        }
-      ],
-      "total": 1,
-      "sum": 55.99,
-      "id": 7
-    },
-    {
       "userId": 1,
       "date": "2022-11-05T16:06:11.686Z",
       "firstName": "Eri",
@@ -501,6 +476,37 @@
       "total": 1,
       "sum": 695,
       "id": 8
+    },
+    {
+      "userId": 1,
+      "date": "2022-11-07T14:11:38.303Z",
+      "firstName": "Eri",
+      "lastName": "Khasanov",
+      "email": "khasanoveri@mail.ru",
+      "phone": "89875441488",
+      "city": "Ufa",
+      "street": "Pushkin",
+      "number": "13",
+      "zipcode": "450085",
+      "delivery": "Courier",
+      "payment": "Payment upon receipt",
+      "products": [
+        {
+          "id": 3,
+          "title": "Mens Cotton Jacket",
+          "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+          "price": 55.99
+        },
+        {
+          "id": 2,
+          "title": "Mens Casual Premium Slim Fit T-Shirts ",
+          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+          "price": 22.3
+        }
+      ],
+      "total": 2,
+      "sum": "78.29",
+      "id": 9
     }
   ],
   "users": [
@@ -566,24 +572,6 @@
     }
   ],
   "carts": [
-    {
-      "userId": 1,
-      "products": [
-        {
-          "id": 3,
-          "title": "Mens Cotton Jacket",
-          "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-          "price": 55.99
-        },
-        {
-          "id": 2,
-          "title": "Mens Casual Premium Slim Fit T-Shirts ",
-          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-          "price": 22.3
-        }
-      ],
-      "id": 1
-    },
     {
       "userId": 7,
       "products": [
