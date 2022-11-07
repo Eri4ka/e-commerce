@@ -656,6 +656,93 @@
       "total": 1,
       "sum": 109.95,
       "id": 14
+    },
+    {
+      "userId": 10,
+      "date": "2022-11-07T19:22:29.451Z",
+      "firstName": "Test",
+      "lastName": "Test",
+      "email": "test1@mail.com",
+      "phone": "88005553535",
+      "city": "Moscow",
+      "street": "12",
+      "number": "11",
+      "zipcode": "121212",
+      "delivery": "Courier",
+      "payment": "Payment upon receipt",
+      "products": [
+        {
+          "id": 2,
+          "title": "Mens Casual Premium Slim Fit T-Shirts ",
+          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+          "price": 22.3
+        },
+        {
+          "id": 1,
+          "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+          "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+          "price": 109.95
+        }
+      ],
+      "total": 2,
+      "sum": "132.25",
+      "id": 15
+    },
+    {
+      "userId": 11,
+      "date": "2022-11-07T19:24:08.855Z",
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@mails.com",
+      "phone": "12121212",
+      "city": "Moscow",
+      "street": "12",
+      "number": "12",
+      "zipcode": "11111",
+      "delivery": "Courier",
+      "payment": "Payment upon receipt",
+      "products": [
+        {
+          "id": 4,
+          "title": "Mens Casual Slim Fit",
+          "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+          "price": 15.99
+        }
+      ],
+      "total": 1,
+      "sum": 15.99,
+      "id": 16
+    },
+    {
+      "userId": 11,
+      "date": "2022-11-07T19:24:29.504Z",
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@mails.com",
+      "phone": "12121212",
+      "city": "Moscow",
+      "street": "12",
+      "number": "12",
+      "zipcode": "11111",
+      "delivery": "Courier",
+      "payment": "Payment upon receipt",
+      "products": [
+        {
+          "id": 2,
+          "title": "Mens Casual Premium Slim Fit T-Shirts ",
+          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+          "price": 22.3
+        },
+        {
+          "id": 4,
+          "title": "Mens Casual Slim Fit",
+          "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+          "price": 15.99
+        }
+      ],
+      "total": 2,
+      "sum": "38.29",
+      "id": 17
     }
   ],
   "users": [
@@ -740,6 +827,29 @@
       "city": "Moscow",
       "street": "Pushkin",
       "number": "10"
+    },
+    {
+      "firstName": "Test",
+      "lastName": "Test",
+      "email": "test1@mail.com",
+      "pass": "123456",
+      "id": 10,
+      "phone": "88005553535",
+      "city": "Moscow",
+      "street": "12",
+      "number": "11"
+    },
+    {
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@mails.com",
+      "pass": "123456",
+      "id": 11,
+      "phone": "12121212",
+      "city": "Moscow",
+      "street": "12",
+      "number": "12",
+      "zipcode": "11111"
     }
   ],
   "carts": [
